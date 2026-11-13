@@ -1,0 +1,29 @@
+
+# ==========================================
+# OPTIDOSE STANDALONE
+# Python: 3.13.16
+# ==========================================
+
+# Machine Learning - Match training environment
+numpy==2.1.3
+pandas==2.2.3
+scipy==1.18.1
+scikit-learn==1.6.1
+joblib==1.6.0
+xgboost==3.4.1
+
+# Model optimization
+scikit-optimize==0.10.2
+
+# ML dependency
+threadpoolctl==3.7.0
+
+# Desktop application
+PySide6==6.12.0
+
+# Hardware communication
+pyserial==3.5
+
+# Development and testing
+pytest
+ruff
