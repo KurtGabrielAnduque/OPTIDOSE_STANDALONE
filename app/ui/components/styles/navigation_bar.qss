@@ -1,0 +1,53 @@
+QFrame#NavigationBar {
+    background-color: #FFFFFF;
+    border-radius: 9px;
+    border: 1px solid #E2E8F0;
+}
+
+QPushButton#MenuToggleButton {
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #111827;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+QPushButton#MenuToggleButton:hover {
+    background-color: #F3F4F6;
+}
+
+QLabel#main-label {
+    font-size: 19px;
+    font-weight: 800;
+    color: #111827;
+    letter-spacing: 0.5px;
+}
+
+QPushButton#NavButton {
+    background-color: transparent;
+    color: #6B7280;
+    border: none;
+    border-radius: 7px;
+    text-align: left;
+    padding-left: 14px;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+QPushButton#NavButton:hover {
+    background-color: #F3F4F6;
+    color: #111827;
+}
+
+QPushButton#NavButton:checked {
+    background-color: #3B6FF5;
+    color: #FFFFFF;
+}
+
+QFrame#SettingsSeparator{
+    background-color: rgba(0, 0, 0, 80);
+    border: none;
+    margin: 50px 0px;
+    max-height: 2px;
+}

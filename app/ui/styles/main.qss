@@ -1,0 +1,7 @@
+QWidget#MainContainer {
+    background-color: #EBF3FE;
+}
+
+QStackedWidget#PageStack {
+    background-color: transparent;
+}
