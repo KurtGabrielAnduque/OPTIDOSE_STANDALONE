@@ -7,7 +7,7 @@ from app.ui.pages import (
     TreatmentPage,
 )
 from app.ui.components.navigation_bar import NavigationBar
-
+from app.mock_data.settings_payload import settings_payload
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
         self.dosage_recommendation = DosageRecommendationPage()
         self.treatment = TreatmentPage()
         self.history = HistoryPage()
-        self.settings = SettingsPage()
+        self.settings = SettingsPage(active_settings=settings_payload)
 
         # (Label, Icon filename in app/resources/images/, Page instance)
         nav_routes = [

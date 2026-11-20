@@ -11,7 +11,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
 )
 
-from app.mock_data.settings_payload import settings_payload
+
 from app.ui.pages.settings.components.lab_config_modal import LabConfigModal
 from app.ui.pages.settings.components.lab_settings_display import LabSettingsDisplay
 
@@ -20,7 +20,7 @@ class SettingsPage(QFrame):
     # Signal you will connect to your service layer later
     settings_submitted = Signal(dict)
 
-    def __init__(self, active_settings: dict | None = settings_payload):
+    def __init__(self, active_settings: dict | None = None):
         super().__init__()
         self.setObjectName("SettingsFrame")
         self._active_settings = active_settings
@@ -147,7 +147,7 @@ class SettingsPage(QFrame):
         self.create_btn.setVisible(has_config)
 
         if has_config:
-            self.operator_lbl.setText(f'Profile: {self._active_settings["name"]}')
+            self.operator_lbl.setText(f'Operator: {self._active_settings["name"]}')
             created_raw = self._active_settings.get("created_at")
             if created_raw:
                 dt = datetime.fromisoformat(created_raw)

@@ -99,7 +99,7 @@ class LabConfigModal(QDialog):
         # 0. Profile / Operator Name
         profile_container.addWidget(self._section_heading("General Information"))
         self.name_input = self._labeled_input(
-            profile_container, "Configuration / Operator Name", "e.g. Maynilad Standard Validation Procedure", is_text=True
+            profile_container, "Operator Name", "e.g. Juan Dela Cruz", is_text=True
         )
 
         body_layout.addWidget(self.profile_frame)
@@ -254,7 +254,7 @@ class LabConfigModal(QDialog):
         inp = QLineEdit()
         inp.setPlaceholderText(placeholder)
         if not is_text:
-            inp.setValidator(QIntValidator(0, 100000))
+            inp.setValidator(QIntValidator(1, 100000))
         wrapper.addWidget(lbl)  
         wrapper.addWidget(inp)
         parent_layout.addLayout(wrapper)
@@ -269,7 +269,7 @@ class LabConfigModal(QDialog):
         lbl = QLabel(label_text)
         lbl.setObjectName("InputLabel")
         inp = QLineEdit()
-        inp.setValidator(QDoubleValidator(0.0, 100000.0, 4) if allow_decimal else QIntValidator(0, 100000))
+        inp.setValidator(QDoubleValidator(1.0, 100000.0, 2) if allow_decimal else QIntValidator(1, 100000))
 
         v_layout.addWidget(lbl)
         v_layout.addWidget(inp)
@@ -285,9 +285,12 @@ class LabConfigModal(QDialog):
 
     def _remove_sequence(self, row_widget: SequenceInputRow) -> None:
         self._sequence_rows.remove(row_widget)
+        self.sequences_container.removeWidget(row_widget)
         row_widget.deleteLater()
+
         for idx, row in enumerate(self._sequence_rows):
             row.set_sequence_number(idx + 1)
+
         if not self._sequence_rows:
             self.empty_seq_label.show()
 
@@ -295,69 +298,102 @@ class LabConfigModal(QDialog):
         self.error_banner.setText(message)
         self.error_banner.show()
 
+    def _parse_int(self, field: QLineEdit, label: str, allow_zero: bool = False) -> int:
+        raw = field.text().strip()
+        if not raw:
+            raise ValueError(f"{label} is required.")
+        try:
+            value = int(raw)
+        except ValueError:
+            raise ValueError(f"{label} must be a whole number.")
+
+        if allow_zero and value < 0:
+            raise ValueError(f"{label} cannot be negative.")
+        if not allow_zero and value <= 0:
+            raise ValueError(f"{label} must be greater than zero.")
+        return value
+
+    def _parse_float(self, field: QLineEdit, label: str) -> int | float:
+        raw = field.text().strip()
+        if not raw:
+            raise ValueError(f"{label} is required.")
+        try:
+            value = float(raw)
+        except ValueError:
+            raise ValueError(f"{label} must be a valid number.")
+
+        if value <= 0:
+            raise ValueError(f"{label} must be greater than zero.")
+        return int(value) if value.is_integer() else value
+
     def _handle_submit(self) -> None:
         self.error_banner.hide()
 
-        # Validate required fields
-        name = self.name_input.text().strip()
-        if not name:
-            self._show_error("Configuration / Operator Name is required.")
-            return
+        try:
+            # 1. General Information
+            name = self.name_input.text().strip()
+            if not name:
+                raise ValueError("Configuration / Operator Name is required.")
 
-        required_fields = [
-            (self.stirring_speed_input, "Stirring Speed"),
-            (self.stirring_dur_input, "Stirring Duration"),
-            (self.flash_speed_input, "Flash Mixing Speed"),
-            (self.flash_dur_input, "Flash Mixing Duration"),
-            (self.dispense_timing_input, "Dispense Timing"),
-            (self.settling_dur_input, "Settling Duration"),
-            (self.sample_vol_input, "Sample Volume"),
-            (self.stock_conc_input, "Stock Concentration"),
-        ]
-        for field, label in required_fields:
-            if not field.text().strip():
-                self._show_error(f"{label} is required.")
-                return
+            # 2. Analysis Configuration
+            stirring_speed = self._parse_int(self.stirring_speed_input, "Stirring Speed")
+            stirring_duration = self._parse_int(self.stirring_dur_input, "Stirring Duration")
 
-        flash_duration = int(self.flash_dur_input.text())
-        dispense_timing = int(self.dispense_timing_input.text())
-
-        # Fail-safe validation rule from your React code
-        if dispense_timing >= flash_duration:
-            self._show_error(
-                f"Dispense timing ({dispense_timing}s) cannot be equal to or greater than the flash mixing duration ({flash_duration}s)."
+            # 3. Coagulation Process — Flash Mixing
+            flash_speed = self._parse_int(self.flash_speed_input, "Flash Mixing Speed")
+            flash_duration = self._parse_int(self.flash_dur_input, "Flash Mixing Duration")
+            dispense_timing = self._parse_int(
+                self.dispense_timing_input, "Dispense Timing", allow_zero=True
             )
+
+            if dispense_timing >= flash_duration:
+                raise ValueError(
+                    f"Dispense timing ({dispense_timing}s) cannot be equal to or greater than "
+                    f"the flash mixing duration ({flash_duration}s)."
+                )
+
+            # 4. Coagulation Process — Slow Mixing Sequences
+            if not self._sequence_rows:
+                raise ValueError("At least one slow mixing sequence is required.")
+
+            sequences_payload = []
+            for idx, row in enumerate(self._sequence_rows, start=1):
+                rpm = self._parse_int(row.rpm_input, f"Seq {idx} RPM")
+                duration = self._parse_int(row.duration_input, f"Seq {idx} Duration")
+                sequences_payload.append({
+                    "sequence_no": idx,
+                    "rpm": rpm,
+                    "duration": duration,
+                })
+
+            # 5. Coagulation Process — Settling Phase
+            settling_duration = self._parse_int(self.settling_dur_input, "Settling Duration")
+
+            # 6. Stock Solution Configuration
+            sample_volume = self._parse_float(self.sample_vol_input, "Sample Volume")
+            stock_concentration = self._parse_float(self.stock_conc_input, "Stock Concentration")
+
+        except ValueError as exc:
+            self._show_error(str(exc))
             return
 
-        sequences_payload = []
-        for idx, row in enumerate(self._sequence_rows):
-            if not row.rpm_input.text().strip() or not row.duration_input.text().strip():
-                self._show_error(f"Please fill in both RPM and Duration for Seq {idx + 1}.")
-                return
-            sequences_payload.append({
-                "sequence_no": idx + 1,
-                "rpm": int(row.rpm_input.text()),
-                "duration": int(row.duration_input.text()),
-            })
-
-        # Exact payload structure expected by your service layer
         payload = {
             "name": name,
             "is_active": True,
             "coagulation_config": {
-                "flash_mixing_speed": int(self.flash_speed_input.text()),
+                "flash_mixing_speed": flash_speed,
                 "flash_mixing_duration": flash_duration,
                 "coagulant_dispense_timing": dispense_timing,
                 "slow_mixing_configurations": sequences_payload,
-                "settling_duration": int(self.settling_dur_input.text()),
+                "settling_duration": settling_duration,
             },
             "concentration_config": {
-                "sample_volume": float(self.sample_vol_input.text()) if "." in self.sample_vol_input.text() else int(self.sample_vol_input.text()),
-                "stock_concentration": float(self.stock_conc_input.text()) if "." in self.stock_conc_input.text() else int(self.stock_conc_input.text()),
+                "sample_volume": sample_volume,
+                "stock_concentration": stock_concentration,
             },
             "analysis_config": {
-                "stirring_speed": int(self.stirring_speed_input.text()),
-                "stirring_duration": int(self.stirring_dur_input.text()),
+                "stirring_speed": stirring_speed,
+                "stirring_duration": stirring_duration,
             },
         }
 
