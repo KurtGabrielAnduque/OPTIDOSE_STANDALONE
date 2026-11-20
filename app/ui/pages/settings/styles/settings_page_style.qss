@@ -1,5 +1,335 @@
-QFrame#SettingsFrame{
-    border: 1px solid #E2E8F0;
-    border-radius: 9px;
+QFrame#SettingsFrame {
     background-color: #FFFFFF;
+    border-radius: 9px;
+    border: 1px solid #E2E8F0;
+}
+
+/* Sticky Header */
+QFrame#MainLabelFrame {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E4E4E7;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+QLabel#PageTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #18181B;
+}
+
+QLabel#ActiveBadge {
+    background-color: #D1FAE5;
+    color: #047857;
+    border: 1px solid #A7F3D0;
+    border-radius: 10px;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+QLabel#PageSubtitle {
+    font-size: 12px;
+    color: #71717A;
+}
+
+QLabel#OperatorNameLabel {
+    font-size: 13px;
+    font-weight: 700;
+    color: #18181B;
+}
+
+QLabel#DateCreatedLabel {
+    font-size: 11px;
+    color: #71717A;
+}
+
+
+QPushButton#ModalCancelBtn {
+    background-color: #FFFFFF;
+    border: 1px solid #696767;
+    border-radius: 6px;
+    color: #000000;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+QPushButton#ModalCancelBtn:hover {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    border-radius: 6px;
+}
+
+QPushButton#AddSequenceBtn {
+    background-color: #000000;
+    border-radius: 6px;
+    color: #ffffff;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+QPushButton#AddSequenceBtn:hover{
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+/* Primary Blue Buttons */
+QPushButton#PrimaryActionBtn,
+QPushButton#ModalSaveBtn {
+    background-color: #000000;
+    border-radius: 6px;
+    color: #ffffff;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+QPushButton#PrimaryActionBtn:hover,
+QPushButton#ModalSaveBtn:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+/* Display Cards */
+QScrollArea#SettingsScroll,
+QFrame#SettingsDisplayContainer {
+    background-color: transparent;
+}
+
+QFrame#SectionCard {
+    background-color: #FFFFFF;
+    border: 1px solid #E4E4E7;
+    border-radius: 10px;
+    margin: 6px 14px 0 14px;
+}
+
+QLabel#SectionTitle {
+    font-size: 15px;
+    font-weight: 700;
+    color: #18181B;
+}
+
+QLabel#SubSectionTitle {
+    font-size: 12px;
+    font-weight: 700;
+    color: #27272A;
+    border-bottom: 1px solid #F4F4F5;
+    padding-bottom: 4px;
+    margin-top: 4px;
+}
+
+/* KPI Boxes */
+QFrame#KpiMetricBox {
+    background-color: #FAFAFA;
+    border: 1px solid #F4F4F5;
+    border-radius: 10px;
+}
+
+QLabel#KpiCaption {
+    font-size: 10px;
+    font-weight: 700;
+    color: #18181B;
+    letter-spacing: 0.6px;
+}
+
+QLabel#KpiValueLarge {
+    font-size: 24px;
+    font-weight: 800;
+    color: #18181B;
+}
+
+QLabel#KpiValueMedium {
+    font-size: 20px;
+    font-weight: 800;
+    color: #18181B;
+}
+
+QLabel#KpiUnit {
+    font-size: 12px;
+    font-weight: 600;
+    color: #18181B;
+    padding-bottom: 3px;
+}
+
+/* Slow Mixing Table */
+QTableWidget#SequenceTable {
+    background-color: #FFFFFF;
+    border: 1px solid #E4E4E7;
+    border-radius: 8px;
+    gridline-color: #F4F4F5;
+    font-size: 12px;
+    color: #3F3F46;
+}
+
+QHeaderView::section {
+    background-color: #FAFAFA;
+    color: #3F3F46;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 6px 10px;
+    border: none;
+    border-bottom: 1px solid #E4E4E7;
+}
+
+/* Empty State */
+QLabel#EmptyHeading {
+    font-size: 17px;
+    font-weight: 700;
+    color: #27272A;
+}
+
+QLabel#EmptyDesc {
+    font-size: 12px;
+    color: #71717A;
+}
+
+/* Creation Modal */
+QDialog#LabConfigModal {
+    background-color: #FFFFFF;
+}
+
+QWidget#ModalBody{
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+}
+
+QFrame#ModalFooter {
+    background-color: #FAFAFA;
+    border-top: 1px solid #E4E4E7;
+    border-bottom: 1px solid #E4E4E7;
+}
+
+QLabel#ModalTitle {
+    font-size: 15px;
+    font-weight: 700;
+    color: #18181B;
+}
+
+QLabel#ModalSectionHeading {
+    font-size: 15px;
+    font-weight: 700;
+    color: #27272A;
+    border-bottom: 1px solid #E4E4E7;
+    padding-bottom: 4px;
+}
+
+QLabel#ModalSubTitle {
+    font-size: 12px;
+    font-weight: 700;
+    color: #3F3F46;
+}
+
+QLabel#InputLabel {
+    font-size: 11px;
+    font-weight: 600;
+    color: #52525B;
+}
+
+QDialog#LabConfigModal QLineEdit {
+    border: 1px solid #D4D4D8;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    background-color: #FFFFFF;
+    color: #18181B;
+}
+
+QDialog#LabConfigModal QLineEdit:focus {
+    border: 1px solid #2563EB;
+}
+
+QFrame#ModalSubBox {
+    background-color: #FAFAFA;
+    border: 1px solid #E4E4E7;
+    border-radius: 8px;
+    margin: 5px 0px;
+}
+
+QFrame#ModalSequenceRow {
+    background-color: #FFFFFF;
+    border: 1px solid #E4E4E7;
+    border-radius: 6px;
+}
+
+QLabel#SeqBadge {
+    background-color: #F4F4F5;
+    color: #52525B;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+
+
+QPushButton#RemoveSeqBtn {
+    background-color: transparent;
+    color: #EF4444;
+    border: none;
+    font-weight: 700;
+}
+
+QPushButton#RemoveSeqBtn:hover {
+    background-color: #FEF2F2;
+    border-radius: 4px;
+}
+
+QLabel#ModalErrorBanner {
+    background-color: #FEF2F2;
+    color: #B91C1C;
+    border: 1px solid #FECACA;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+
+QPushButton#ModalCloseBtn {
+    background-color: transparent;
+    border: none;
+    color: #71717A;
+    font-size: 14px;
+}
+
+QFrame#ProfileInputContainer{
+    background-color: #FFFFFF;
+    border-radius: 9px;
+    border: 1px solid #E2E8F0;
+    padding: 10px 15px;
+}
+
+QFrame#AnalysisInputContainer{
+    background-color: #FFFFFF;
+    border-radius: 9px;
+    border: 1px solid #E2E8F0;
+    padding: 10px 15px;
+}
+
+QFrame#CoagulationInputContainer{
+    background-color: #FFFFFF;
+    border-radius: 9px;
+    border: 1px solid #E2E8F0;
+    padding: 10px 15px;
+}
+
+QFrame#StockInputContainer{
+    background-color: #FFFFFF;
+    border-radius: 9px;
+    border: 1px solid #E2E8F0;
+    padding: 10px 15px;
+}
+
+QLabel#EmptySeqPlaceholder{
+    background-color: #FFFFFF;
+    border: 1px solid #E4E4E7;
+    border-radius: 6px;
+    padding: 15px 0px;
 }
