@@ -1,5 +1,233 @@
-QFrame#DosageRecomendationFrame{
-    border: 1px solid #E2E8F0;
-    border-radius: 9px;
+QFrame#DosagePageFrame {
     background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+}
+
+QFrame#LeftTelemetryColumn,
+QFrame#BottomActionBar {
+    background-color: transparent;
+}
+
+QFrame#HairlineDivider {
+    background-color: #E4E4E7;
+    border: none;
+}
+
+/* Header Typography */
+QLabel#HeaderEyebrow {
+    font-size: 9px;
+    font-weight: 700;
+    color: #71717A;
+    letter-spacing: 1.4px;
+}
+
+QLabel#HeaderTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #09090B;
+}
+
+QLabel#HeaderSubtitle {
+    font-size: 11px;
+    color: #52525B;
+}
+
+QLabel#HeaderNote {
+    font-size: 10px;
+    color: #71717A;
+}
+
+/* Top Black Sample ID Bar */
+QFrame#SampleStatusBar {
+    background-color: #09090B;
+    border-radius: 6px;
+}
+
+QLabel#SampleIdPrefix {
+    font-size: 13px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+QLabel#SampleIdText {
+    font-size: 13px;
+    font-weight: 400;
+    color: #E4E4E7;
+}
+
+QLabel#SampleStatusText {
+    font-size: 13px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* Telemetry Parameter Cards */
+QFrame#TelemetryCard {
+    background-color: #FFFFFF;
+    border: 1px solid #D4D4D8;
+    border-radius: 8px;
+}
+
+QLabel#TelemetryLabel {
+    font-size: 14px;
+    font-weight: 800;
+    color: #000000;
+}
+
+QLabel#TelemetryValue {
+    font-size: 30px;
+    font-weight: 700;
+    color: #09090B;
+}
+
+QLabel#TelemetryValueEmpty {
+    font-size: 22px;
+    font-weight: 700;
+    color: #D4D4D8;
+}
+
+QLabel#TelemetryUnit {
+    font-size: 12px;
+    font-weight: 700;
+    color: #080808;
+}
+
+QLabel#AnalyzedTimestamp {
+    font-size: 12px;
+    font-weight: 500;
+    color: #000000;
+    padding-top: 2px;
+}
+
+/* Right Black Predicted Dosage Card */
+QFrame#PredictionMonolithCard {
+    background-color: #09090B;
+    border-radius: 8px;
+}
+
+QLabel#PredictionTag {
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 1.2px;
+}
+
+QLabel#ChemicalTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+QLabel#DosageMainValue {
+    font-size: 40px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+QLabel#DosageMainValueEmpty {
+    font-size: 40px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+QLabel#DosageMainUnit {
+    font-size: 30px;
+    font-weight: 700;
+    color: #FFFFFF;
+    padding-bottom: 6px;
+}
+
+QLabel#PredictionSubtext {
+    font-size: 11px;
+    color: #A1A1AA;
+}
+
+QFrame#PredictionDivider {
+    background-color: #ffffff;
+    border: none;
+}
+
+QLabel#DispenseVolumeValue {
+    font-size: 30px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+QLabel#DispenseVolumeEmpty {
+    font-size: 30px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+/* Bottom Action Bar & Chamber Confirmation Box */
+QFrame#ChamberConfirmBox {
+    background-color: #FAFAFA;
+    border: 1px solid #D4D4D8;
+    border-radius: 6px;
+}
+
+QFrame#ChamberConfirmBoxChecked {
+    background-color: #F4F4F5;
+    border: 1px solid #D4D4D8;
+    border-radius: 6px;
+}
+
+QFrame#ChamberConfirmBoxWarning {
+    background-color: #FFFBEB;
+    border: 1px solid #F59E0B;
+    border-radius: 6px;
+}
+
+QLabel#ChamberLabelNormal {
+    font-size: 11px;
+    font-weight: 500;
+    color: #3F3F46;
+}
+
+QLabel#ChamberLabelChecked {
+    font-size: 11px;
+    font-weight: 600;
+    color: #09090B;
+}
+
+QLabel#ChamberLabelWarning {
+    font-size: 11px;
+    font-weight: 600;
+    color: #B45309;
+}
+
+QPushButton#PrimaryBlackBtn {
+    background-color: #09090B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+QPushButton#PrimaryBlackBtn:hover {
+    background-color: #27272A;
+}
+
+QPushButton#SecondaryOutlineBtn {
+    background-color: #FFFFFF;
+    color: #09090B;
+    border: 1px solid #D4D4D8;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+QPushButton#SecondaryOutlineBtn:hover {
+    background-color: #F4F4F5;
+}
+
+QPushButton#AnalyzingDisabledBtn {
+    background-color: #3F3F46;
+    color: #E4E4E7;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
 }

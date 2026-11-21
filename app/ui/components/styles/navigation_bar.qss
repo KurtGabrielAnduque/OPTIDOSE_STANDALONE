@@ -41,7 +41,7 @@ QPushButton#NavButton:hover {
 }
 
 QPushButton#NavButton:checked {
-    background-color: #3B6FF5;
+    background-color: #000000;
     color: #FFFFFF;
 }
 
